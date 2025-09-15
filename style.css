@@ -1,13 +1,20 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background: #f4f9ff;
+  background: url('istockphoto-1222034739-612x612.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   margin: 0;
   padding: 0;
+  
 }
 
 h1 {
   margin: 20px 0;
+  color: white;
+  text-shadow: 2px 2px 4px #1d1c1c;
+  perspective: 200px;
+
 }
 
 .grid {
@@ -17,41 +24,102 @@ h1 {
   max-width: 1000px;
   margin: auto;
   padding: 10px;
+  perspective: 800px;
 }
 
-.grid img {
+.card {
+  position: relative;
+}
+
+.card img {
   width: 100%;
   height: auto;
+  display: block;
   border: 2px solid #333;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 400ms ease, opacity 300ms ease;
+  transform-origin: center;
+  backface-visibility: hidden;
 }
 
-/* Fold-down effect */
-.grid img.down {
+.card img.down {
   transform: rotateX(90deg);
-  opacity: 0.3;
+  opacity: 0;
 }
 
-/* Small screens (phones) */
+/* back button */
+.back-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 24px;
+  cursor: pointer;
+  opacity: 0;            /* hidden by default */
+  pointer-events: none;  /* don’t block clicks until shown */
+  transition: opacity 0.3s;
+}
+
+/* Show button only when image is down */
+.card img.down + .back-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+.click-me{
+  background: rgba(224, 224, 224, 0.8);
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+
+.click-me:hover{
+  background: rgba(255,255,255,1);
+}
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.6) url('Sho_Boys_II_Planet_profile_photo_1.jpeg') no-repeat center center;
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .overlay.show {
+      display: block;
+    }
+
+
 @media (max-width: 600px) {
   .grid {
     grid-template-columns: repeat(3, 1fr); /* 3 per row */
   }
 }
 
-/* Medium screens (tablets) */
 @media (min-width: 601px) and (max-width: 900px) {
   .grid {
     grid-template-columns: repeat(4, 1fr); /* 4 per row */
   }
 }
 
-/* Large screens (desktop) */
 @media (min-width: 901px) {
   .grid {
-    grid-template-columns: repeat(6, 1fr); /* 6 per row */
+    grid-template-columns: repeat(6, 1fr); 
   }
 }
 
